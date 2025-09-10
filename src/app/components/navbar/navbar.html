@@ -1,1 +1,16 @@
-<p>navbar works!</p>
+<nav class="navbar">
+  <div class="navbar-brand">
+    <a routerLink="/home">CinemaCity</a>
+  </div>
+  <div class="navbar-links">
+    <a routerLink="/movies">Movies</a>
+    <ng-container *ngIf="!authService.isAuthenticated()">
+      <a routerLink="/login" class="nav-button">Login</a>
+      <a routerLink="/register" class="nav-button primary">Register</a>
+    </ng-container>
+    <ng-container *ngIf="authService.isAuthenticated()">
+      <span class="welcome-user">Welcome, {{authService.getUsername()}}</span>
+      <a (click)="logout()" class="nav-button primary">Logout</a>
+    </ng-container>
+  </div>
+</nav>
