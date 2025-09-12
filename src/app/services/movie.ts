@@ -5,20 +5,21 @@ import {Observable} from 'rxjs';
 
 export interface Movie {
   id: string;
-  imdbId: string;
+  // imdbId: string;
   title: string;
   description: string;
   posterUrl: string;
   duration: number;
-  genres: {id:number, name: string}[];
+  genres: string[];
 
 }
 @Injectable({
   providedIn: 'root'
 })
 export class MovieService{
-  private backendUrl = 'https://localhost:8081/api/movies';
-  private http = inject(HttpClient)
+  private backendUrl = 'http://localhost:8081/api/movies';
+  // private http = inject(HttpClient)
+  constructor(private http: HttpClient) { }
   getMovies():Observable<Movie[]>{
     return this.http.get<Movie[]>(this.backendUrl);
   }

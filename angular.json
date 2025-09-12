@@ -62,6 +62,10 @@
               "buildTarget": "Movie:build:development"
             }
           },
+          "options": {
+            "ssl": false,
+            "buildTarget": "Movie:build"
+          },
           "defaultConfiguration": "development"
         },
         "extract-i18n": {

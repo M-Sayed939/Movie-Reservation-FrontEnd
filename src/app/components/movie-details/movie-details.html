@@ -1,1 +1,24 @@
-<p>movie-ddetails works!</p>
+<div class="details-container" *ngIf="movieData">
+  <div class="poster-container">
+    <img [src]="movieData.posterUrl" alt="{{ movieData.title }} Poster" class="movie-poster-large">
+  </div>
+  <div class="info-container">
+    <h1 class="movie-title-large">{{ movieData.title }}</h1>
+    <div class="genre-container-large">
+      <!-- CORRECTED: Display the genre string directly -->
+      <span *ngFor="let genre of movieData.genres" class="genre-tag">{{ genre }}</span>
+    </div>
+    <p class="duration">Duration: {{ movieData.duration }} minutes</p>
+    <p class="description">{{ movieData.description }}</p>
+
+    <div class="showtimes-section">
+      <h2>Showtimes</h2>
+      <!-- This will be implemented in the next step -->
+      <p>Showtimes functionality will be added soon.</p>
+    </div>
+  </div>
+</div>
+<ng-template #loading>
+  <p class="info-text">Loading movie details...</p>
+</ng-template>
+

@@ -1,71 +1,118 @@
-.nw-container{
-  max-width: 1200px;
+/* Main container for the movie list page */
+.movie-list-container {
+  max-width: 1600px;
   margin: 2rem auto;
-  padding: 0 1rem;
-  font-family: 'Almarai', sans-serif;
-}
-h1{
-  color: #facc15;
+  padding: 0 2rem;
   text-align: center;
-  margin-bottom: 2rem;
-  letter-spacing: 1px;
+}
+
+/* "Now Showing" heading style */
+h1 {
+  color: #ffc107; /* Bright yellow/gold */
   font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 2.5rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
-.loading-indicator, .no-movies{
-  text-align: center;
-  color: #9ca3af;
-  font-size: 1.25rem;
-  padding: 4rem 0;
+
+/* Loading and empty state messages */
+.loading-message,
+.empty-message {
+  color: #a0a0a0;
+  font-size: 1.2rem;
+  margin-top: 5rem;
 }
-.movie-grid{
+
+/* The responsive grid for movie cards */
+.movie-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1.5rem;
+  /* This creates a responsive grid that fits as many columns as possible */
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2.5rem;
+  text-align: left;
 }
-.movie-card{
-  background: #1f2937;
+
+/* Individual movie card container */
+.movie-card {
+  background-color: #1c1c1c;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-  display: flex;
-  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  display: flex; /* Using flexbox for internal layout */
   flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
 }
-.movie-card:hover{
-  transform: translateY(-5px);
-  box-shadow: 0 8px 15px rgba(250,204,21,0.2);
+
+.movie-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 24px rgba(255, 193, 7, 0.1);
 }
-.movie-poster{
+
+/* Movie poster image style */
+.poster-image {
   width: 100%;
-  height: 300px;
+  height: 420px;
   object-fit: cover;
 }
-.movie-info {
-  padding: 1rem;
-  flex-grow: 1;
-  display: flex;
+
+/* Container for the text content below the poster */
+.card-content {
+  padding: 1.5rem;
+  display: flex; /* Flexbox for internal content alignment */
   flex-direction: column;
+  flex-grow: 1; /* Makes this section fill the remaining card space */
 }
+
+/* Movie title style */
 .movie-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #f9fafb;
-  margin: 0 0 0.5rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  color: #ffffff;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0 0 0.75rem 0;
+  line-height: 1.3;
+  min-height: 3.6rem; /* Ensures cards align even with 1 vs 2 line titles */
 }
-.genre-tags{
-  margin-bottom: 0.5rem;
-  flex-grow: 1;
+
+/* Container for the genre tags */
+.genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
 }
-.genre-tag{
-  display: inline-block;
-  background-color: #374151;
-  color: #d1d5db;
-  padding: 0.25rem 0.5rem;
-  border-radius: 12px;
+
+/* Individual genre tag style */
+.genre-tag {
+  background-color: #333333;
+  color: #cccccc;
   font-size: 0.75rem;
-  margin-right: 0.25rem;
-  margin-bottom: 0.25rem;
+  font-weight: 500;
+  padding: 0.3rem 0.6rem;
+  border-radius: 15px;
+  text-transform: uppercase;
 }
+
+/* "See More" button style */
+.details-button {
+  margin-top: auto; /* Pushes the button to the bottom of the card */
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background-color: #ffc107;
+  color: #121212;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.details-button:hover {
+  background-color: #ffd24d;
+}
+

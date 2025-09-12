@@ -1,16 +1,20 @@
 <nav class="navbar">
   <div class="navbar-brand">
-    <a routerLink="/home">CinemaCity</a>
+    <a routerLink="/">Fimo's Cinema</a>
   </div>
   <div class="navbar-links">
     <a routerLink="/movies">Movies</a>
-    <ng-container *ngIf="!authService.isAuthenticated()">
+
+    <ng-container *ngIf="currentUser() as user; else guestView">
+      <a routerLink="/my-reservations">My Reservations</a>
+      <span class="welcome-message">Welcome, {{ user.sub }}</span>
+      <button (click)="logout()" class="logout-button">Logout</button>
+    </ng-container>
+
+    <ng-template #guestView>
       <a routerLink="/login" class="nav-button">Login</a>
-      <a routerLink="/register" class="nav-button primary">Register</a>
-    </ng-container>
-    <ng-container *ngIf="authService.isAuthenticated()">
-      <span class="welcome-user">Welcome, {{authService.getUsername()}}</span>
-      <a (click)="logout()" class="nav-button primary">Logout</a>
-    </ng-container>
+      <a routerLink="/register" class="nav-button register">Register</a>
+    </ng-template>
   </div>
 </nav>
+

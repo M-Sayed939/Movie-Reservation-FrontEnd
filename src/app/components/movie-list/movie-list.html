@@ -1,21 +1,32 @@
-<div class="nw-container">
+<div class="movie-list-container">
   <h1>Now Showing</h1>
-  <div *ngIf="isLoading" class="loading-indicator">
-    <p>Loading movies...</p>
-  </div>
-  <div *ngIf="!isLoading && movies.length === 0" class="no-movies">
-    <p>No movies available. Please check back later.</p>
-  </div>
-  <div *ngIf="!isLoading && movies.length > 0" class="movie-grid">
-    <div *ngFor="let movie of movies" class="movie-card">
-      <img [src]="movie.posterUrl" [alt]=" movie.title" class="movie-poster"/>
-      <div class="movie-info">
-        <h3 class="movie-title">{{ movie.title }}</h3>
-        <div class="genre-tags">
-          <span *ngFor="let genre of movie.genres" class="genre-tag">{{ genre.name }}</span>
+
+  <!-- Async pipe handles the observable subscription -->
+  <ng-container *ngIf="movies$ | async as movies; else loading">
+    <div *ngIf="movies.length > 0; else empty" class="movie-grid">
+      <!-- Loop through each movie -->
+      <a *ngFor="let movie of movies" [routerLink]="['/movies', movie.id]" class="movie-card">
+        <img [src]="movie.posterUrl" [alt]="movie.title" class="poster-image">
+        <div class="card-content">
+          <h2 class="movie-title">{{ movie.title }}</h2>
+          <div class="genres">
+            <span *ngFor="let genre of movie.genres" class="genre-tag">{{ genre }}</span>
+          </div>
+          <!-- The "See More" button is now styled to always be at the bottom -->
+          <button class="details-button">See More</button>
         </div>
-        <button class="details-button">View Showtimes</button>
-      </div>
+      </a>
     </div>
-  </div>
+  </ng-container>
+
+  <!-- Template for loading state -->
+  <ng-template #loading>
+    <p class="loading-message">Loading movies...</p>
+  </ng-template>
+
+  <!-- Template for empty state -->
+  <ng-template #empty>
+    <p class="empty-message">No movies available. Please check back later.</p>
+  </ng-template>
 </div>
+

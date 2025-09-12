@@ -8,7 +8,7 @@ import {jwtDecode} from 'jwt-decode';
   providedIn: 'root'
 })
 export class Auth {
-  private backendUrl = 'https://localhost.8081/api/auth';
+  private backendUrl = 'http://localhost.8081/api/auth';
   private http = inject(HttpClient);
   currentUser = signal<string | null>(this.getUserFromToken());
   isAuthenticated = signal<boolean>(this.hasToken());
@@ -17,7 +17,7 @@ export class Auth {
   // }
 
   login(loginData: any): Observable<any> {
-    return this.http.post(`${this.backendUrl}/login`, loginData).pipe(
+    return this.http.post(`http://localhost:8081/api/auth/login`, loginData).pipe(
       tap((response: any) => {
         if (response && response.accessToken) {
           localStorage.setItem('auth_token', response.accessToken);
@@ -27,7 +27,7 @@ export class Auth {
     );
   }
   register(userDetails: any): Observable<any> {
-    return this.http.post(`${this.backendUrl}/signup`, userDetails);
+    return this.http.post(`http://localhost:8081/api/auth/signup`, userDetails);
   }
 
   logout(): void {

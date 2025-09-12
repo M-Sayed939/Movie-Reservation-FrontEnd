@@ -7,14 +7,15 @@ import {Auth} from '../../services/auth';
   selector: 'app-navbar',
   imports: [CommonModule,RouterLink],
   templateUrl: './navbar.html',
-  styleUrl: './navbar.css'
+  styleUrl: './navbar.css',
+  standalone: true
 })
 export class Navbar {
   authService = inject(Auth);
-  router = inject(Router);
+
+  currentUser = this.authService.currentUser;
   logout(): void {
     this.authService.logout();
-    this.router.navigate(['/login']);
   }
 
 }
