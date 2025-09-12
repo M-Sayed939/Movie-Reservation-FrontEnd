@@ -1,4 +1,4 @@
-import {Injectable, signal} from '@angular/core';
+import {inject, Injectable, signal} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable, tap} from 'rxjs';
 // import { Router } from '@angular/router';
@@ -9,25 +9,30 @@ import {jwtDecode} from 'jwt-decode';
 })
 export class Auth {
   private backendUrl = 'https://localhost.8081/api/auth';
+  private http = inject(HttpClient);
+  currentUser = signal<string | null>(this.getUserFromToken());
   isAuthenticated = signal<boolean>(this.hasToken());
 
-  constructor(private http: HttpClient) {
-  }
+  // constructor(private http: HttpClient) {
+  // }
 
   login(loginData: any): Observable<any> {
     return this.http.post(`${this.backendUrl}/login`, loginData).pipe(
       tap((response: any) => {
         if (response && response.accessToken) {
           localStorage.setItem('auth_token', response.accessToken);
-          this.isAuthenticated.set(true);
+          this.currentUser.set(this.getUserFromToken());
         }
       })
     );
   }
+  register(userDetails: any): Observable<any> {
+    return this.http.post(`${this.backendUrl}/signup`, userDetails);
+  }
 
   logout(): void {
     localStorage.removeItem('auth_token');
-    this.isAuthenticated.set(false);
+    this.currentUser.set(null);
   }
 
   getToken(): string | null {
@@ -52,6 +57,21 @@ export class Auth {
       } catch (error) {
         console.error('Error decoding token:', error);
         return null;
+      }
+    }
+    return null;
+  }
+
+  private getUserFromToken():any|null {
+    const token = localStorage.getItem('auth_token');
+    if(token){
+      try{
+        return jwtDecode(token);
+      }catch (e) {
+        console.error('Invalid Token', e);
+        localStorage.removeItem('auth_token');
+        return null;
+
       }
     }
     return null;
