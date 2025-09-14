@@ -1,20 +1,21 @@
 <nav class="navbar">
-  <div class="navbar-brand">
-    <a routerLink="/">Fimo's Cinema</a>
-  </div>
-  <div class="navbar-links">
-    <a routerLink="/movies">Movies</a>
+  <div class="navbar-container">
+    <a routerLink="/home" class="navbar-brand">Fimo's Cinema</a>
+    <div class="navbar-links">
+      <a routerLink="/movies" class="nav-link">Movies</a>
 
-    <ng-container *ngIf="currentUser() as user; else guestView">
-      <a routerLink="/my-reservations">My Reservations</a>
-      <span class="welcome-message">Welcome, {{ user.sub }}</span>
-      <button (click)="logout()" class="logout-button">Logout</button>
-    </ng-container>
+      <ng-container *ngIf="currentUser() as username; else guestView">
+        <a routerLink="/my-reservations" class="nav-link">My Reservations</a>
+        <a *ngIf="isAdmin()" routerLink="/admin" class="nav-link admin-link">Admin</a>
+        <span class="welcome-message">Welcome, {{ username }}</span>
+        <button (click)="logout()" class="logout-button nav-button">Logout</button>
+      </ng-container>
 
-    <ng-template #guestView>
-      <a routerLink="/login" class="nav-button">Login</a>
-      <a routerLink="/register" class="nav-button register">Register</a>
-    </ng-template>
+      <ng-template #guestView>
+        <a routerLink="/login" class="nav-button login" >Login</a>
+        <a routerLink="/register" class="nav-button register">Register</a>
+      </ng-template>
+    </div>
   </div>
 </nav>
 

@@ -1,0 +1,37 @@
+<div class="reservation-container">
+  <h1 class="page-title">Select Your Seats</h1>
+
+  <div *ngIf="isLoading" class="loading-message">Loading seat map...</div>
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+  <div *ngIf="!isLoading && seatAvailability" class="seating-area">
+    <div class="screen">SCREEN</div>
+
+    <div class="seat-grid">
+      <div *ngFor="let row of seatGrid" class="seat-row">
+        <div *ngFor="let seatNumber of row"
+             class="seat"
+             [class.reserved]="isSeatReserved(seatNumber)"
+             [class.selected]="isSeatSelected(seatNumber)"
+             (click)="toggleSeat(seatNumber)">
+          {{ seatNumber }}
+        </div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item"><div class="seat available"></div> Available</div>
+      <div class="legend-item"><div class="seat selected"></div> Selected</div>
+      <div class="legend-item"><div class="seat reserved"></div> Reserved</div>
+    </div>
+
+    <div class="booking-summary">
+      <p *ngIf="selectedSeats.size > 0">
+        Selected Seats: <strong>{{ Array.from(selectedSeats).join(', ') }}</strong>
+      </p>
+      <button class="book-now-btn" (click)="bookSeats()" [disabled]="selectedSeats.size === 0">
+        Book Now
+      </button>
+    </div>
+  </div>
+</div>

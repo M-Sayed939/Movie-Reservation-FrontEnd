@@ -13,6 +13,14 @@ export interface Movie {
   genres: string[];
 
 }
+export interface Showtime {
+  id: number;
+  movieTitle: string;
+  CinemaName: string;
+  startTime: string;
+  endTime: string;
+  price: string;
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -21,9 +29,12 @@ export class MovieService{
   // private http = inject(HttpClient)
   constructor(private http: HttpClient) { }
   getMovies():Observable<Movie[]>{
-    return this.http.get<Movie[]>(this.backendUrl);
+    return this.http.get<Movie[]>(`http://localhost:8081/api/movies`);
   }
   getMovieById(id:string):Observable<Movie>{
-    return this.http.get<Movie>(`${this.backendUrl}/${id}`);
+    return this.http.get<Movie>(`http://localhost:8081/api/movies/${id}`);
+  }
+  getShowtimesForMovie(movieId:string, date:string):Observable<Showtime[]>{
+    return this.http.get<Showtime[]>(`http://localhost:8081/api/movies/${movieId}/showtimes?date=${date}`);
   }
 }

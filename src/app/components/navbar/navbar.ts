@@ -14,6 +14,9 @@ export class Navbar {
   authService = inject(Auth);
 
   currentUser = this.authService.currentUser;
+  isAdmin(): boolean {
+    return this.authService.getUserRole() === 'ADMIN';
+  }
   logout(): void {
     this.authService.logout();
   }

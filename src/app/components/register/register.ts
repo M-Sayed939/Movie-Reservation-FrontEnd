@@ -14,6 +14,7 @@ import {Auth} from '../../services/auth';
 export class Register {
   registerForm: FormGroup;
   errorMessage: string | null = null;
+  successMessage: string | null = null;
 
   private fb = inject(FormBuilder);
   private authService = inject(Auth);
@@ -32,14 +33,19 @@ export class Register {
 
   onSubmit(): void {
     if (this.registerForm.invalid) {
+      this.errorMessage = 'Please fill out the form correctly.';
       return;
     }
 
     this.errorMessage = null;
+    this.successMessage = null;
     this.authService.register(this.registerForm.value).subscribe({
       next: () => {
-        // On successful registration, redirect to the login page with a success message
-        this.router.navigate(['/login'], { queryParams: { registered: 'true' } });
+        // this.router.navigate(['/login'], { queryParams: { registered: 'true' } });
+        this.successMessage = 'Registration successful! Redirecting to login...';
+        setTimeout(() => {
+          this.router.navigate(['/login']);
+        },3000);
       },
       error: (err: any) => {
         this.errorMessage = err.error?.message || 'Registration failed. Please try again.';

@@ -1,24 +1,48 @@
-<div class="details-container" *ngIf="movieData">
-  <div class="poster-container">
-    <img [src]="movieData.posterUrl" alt="{{ movieData.title }} Poster" class="movie-poster-large">
-  </div>
-  <div class="info-container">
-    <h1 class="movie-title-large">{{ movieData.title }}</h1>
-    <div class="genre-container-large">
-      <!-- CORRECTED: Display the genre string directly -->
-      <span *ngFor="let genre of movieData.genres" class="genre-tag">{{ genre }}</span>
-    </div>
-    <p class="duration">Duration: {{ movieData.duration }} minutes</p>
-    <p class="description">{{ movieData.description }}</p>
+<div class="page-container">
+  <ng-container *ngIf="movieData$ | async as movieData; else loading">
+    <div class="details-grid">
+      <div class="poster-container">
+        <img [src]="movieData.posterUrl" [alt]="movieData.title + ' Poster'" class="movie-poster-large">
+      </div>
+      <div class="info-container">
+        <h1 class="movie-title-large">{{ movieData.title }}</h1>
 
-    <div class="showtimes-section">
-      <h2>Showtimes</h2>
-      <!-- This will be implemented in the next step -->
-      <p>Showtimes functionality will be added soon.</p>
+        <div class="genres">
+          <span *ngFor="let genre of movieData.genres" class="genre-tag">{{ genre }}</span>
+        </div>
+
+        <p class="duration">Duration: {{ movieData.duration }} minutes</p>
+        <p class="description">{{ movieData.description }}</p>
+
+        <div class="showtimes-section">
+          <h2>Showtimes</h2>
+          <div class="date-picker">
+            <label for="showtime-date">Select Date:</label>
+            <input type="date" id="showtime-date" [value]="selectedDate" (change)="onDateChange($event)">
+          </div>
+
+          <div class="showtimes-list" *ngIf="showtimes$ | async as showtimes; else showtimeLoading">
+            <ng-container *ngIf="showtimes.length > 0; else noShowtimes">
+              <a *ngFor="let showtime of showtimes"
+                 [routerLink]="['/book', showtime.id]"
+                 class="showtime-btn">
+                {{ showtime.startTime | date: 'shortTime' }}
+              </a>
+            </ng-container>
+            <ng-template #noShowtimes>
+              <p class="no-showtimes-message">No showtimes available for the selected date.</p>
+            </ng-template>
+          </div>
+          <ng-template #showtimeLoading>
+            <p>Loading showtimes...</p>
+          </ng-template>
+        </div>
+      </div>
     </div>
-  </div>
+  </ng-container>
+
+  <ng-template #loading>
+    <p class="loading-message">Loading movie details...</p>
+  </ng-template>
 </div>
-<ng-template #loading>
-  <p class="info-text">Loading movie details...</p>
-</ng-template>
 

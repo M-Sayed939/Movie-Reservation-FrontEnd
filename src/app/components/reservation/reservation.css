@@ -1,0 +1,147 @@
+.reservation-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #1a1d23;
+  border-radius: 12px;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+}
+
+.page-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffd700;
+  margin-bottom: 2rem;
+}
+
+.loading-message, .error-message {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2rem;
+}
+
+.error-message {
+  color: #ff4d4d;
+  background-color: rgba(255, 77, 77, 0.1);
+  border: 1px solid #ff4d4d;
+  border-radius: 8px;
+}
+
+.seating-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.screen {
+  width: 80%;
+  padding: 0.75rem;
+  text-align: center;
+  background-color: #333;
+  color: #ccc;
+  border-radius: 6px 6px 0 0;
+  letter-spacing: 2px;
+  font-weight: 500;
+  border-bottom: 4px solid #ffd700;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+.seat-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.seat-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.seat {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #4CAF50;
+  color: #fff;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.seat:not(.reserved):hover {
+  transform: scale(1.1);
+}
+
+.seat.selected {
+  background-color: #ffd700;
+  color: #1a1d23;
+  border-color: #fff;
+}
+
+.seat.reserved {
+  background-color: #555;
+  color: #888;
+  cursor: not-allowed;
+  border-color: #333;
+}
+
+.legend {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.legend-item .seat {
+  width: 20px;
+  height: 20px;
+  cursor: default;
+}
+
+.booking-summary {
+  margin-top: 2rem;
+  text-align: center;
+  width: 100%;
+}
+
+.booking-summary p {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.book-now-btn {
+  background-color: #ffd700;
+  color: #1a1d23;
+  border: none;
+  padding: 0.8rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.book-now-btn:hover:not(:disabled) {
+  background-color: #ffc400;
+  transform: translateY(-2px);
+}
+
+.book-now-btn:disabled {
+  background-color: #555;
+  color: #888;
+  cursor: not-allowed;
+}

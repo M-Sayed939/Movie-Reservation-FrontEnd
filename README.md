@@ -4,12 +4,22 @@ This is a modern, standalone Angular application that provides a professional us
 
 This frontend consumes the **[Movie Reservation REST API (Spring Boot)](https://github.com/M-Sayed939/Movie-Reservation.git)**.
 
+## Table of Contents
+
+1.  [Preview](#preview)
+2.  [Features](#features-)
+3.  [Technology Stack](#technology-stack-)
+4.  [Getting Started](#getting-started-)
+
 -----
 
 ### Preview
 
-**Home Page**
-![Home](preview/Home.png)
+**Home Page Guest View**
+![Home Guest](preview/Home-Guest.png)
+**Home Page Auth User View**
+![Home Guest](preview/Home-User.png)
+
 
 **Movie List Page**
 ![Movie1](preview/Movie1.png)
@@ -20,17 +30,38 @@ This frontend consumes the **[Movie Reservation REST API (Spring Boot)](https://
 
 **Registration Page**
 ![Register](preview/Register.png)
+**Registration Page Failed**
+![Register](preview/Login Failed.png)
+**Registration Page Success**
+![Register](preview/Login Successful.png)
+
+**Movie Details Page Choose Date**
+![Movie Details](preview/Movie Detail Choose Date.png)
+**Movie Details Page No Showtime**
+![Movie Details](preview/Movie Detail No Showtime.png)
+**Movie Details Page with Showtime**
+![Movie Details](preview/Movie Detail with Showtime 1.png)
+![Movie Details](preview/Movie Detail with Showtime 2.png)
+
+**Seat Reservation Page**
+![Seat Reservation](preview/Seat.png)
+**Booking Confirmation Page**
+![Booking Confirmation](preview/Book Seat.png)
+
+**My Reservations Page**
+![My Reservations](preview/My Reservation.png)
+
 
 -----
 
 ## Features ✨
 
-- **Modern Standalone Architecture:** Built with Angular's latest standalone components, services, and guards for a clean and maintainable codebase.
-- **Dynamic UI:** The interface, especially the navbar, reactively updates based on the user's authentication status using Angular Signals.
-- **Professional Styling:** A custom-designed, responsive user interface with a cinematic black and yellow theme, smooth animations, and a focus on user experience.
-- **Movie Browsing:** Users can view a grid of currently playing movies and click to see a detailed view with descriptions, genres, and showtimes.
-- **Interactive Seat Reservation:** A visual seat map allows users to see which seats are available for a showtime and select the ones they wish to book.
-- **Secure Route Guarding:** The booking page is protected by an authentication guard, automatically redirecting unauthenticated users to the login page.
+- **Modern Standalone Architecture:** Built with Angular's latest standalone components, services, and guards for a clean codebase.
+- **Dynamic UI:** The navbar and other elements reactively update based on the user's authentication status using Angular Signals.
+- **Professional Styling:** A custom-designed, responsive UI with a cinematic black and yellow theme and smooth animations.
+- **Movie Browsing:** Users can view a grid of currently playing movies and see a detailed view with descriptions, genres, and showtimes.
+- **Interactive Seat Reservation:** A visual seat map allows users to see which seats are available and select the ones they wish to book.
+- **Secure Route Guarding:** Booking and reservation history pages are protected by authentication guards.
 
 ## Technology Stack 🛠️
 
@@ -38,10 +69,8 @@ This frontend consumes the **[Movie Reservation REST API (Spring Boot)](https://
 - **Language:** TypeScript
 - **Styling:** CSS (with modern features like Flexbox and Grid)
 - **State Management:** Angular Signals
-- **HTTP Client:** Angular `HttpClient` for API communication
+- **HTTP Client:** Angular `HttpClient` with Interceptors
 - **Build Tool:** Angular CLI
-
------
 
 ## Getting Started 🚀
 
@@ -49,12 +78,12 @@ This frontend consumes the **[Movie Reservation REST API (Spring Boot)](https://
 
 - **Node.js and npm**: Latest LTS version recommended.
 - **Angular CLI**: `npm install -g @angular/cli`
-- The **[Spring Boot Backend](https://github.com/M-Sayed939/Movie-Reservation.git)** must be running.
+- The **[Spring Boot Backend](https://github.com/M-Sayed939/Movie-Reservation)** must be running.
 
 ### 1\. Clone the Repository
 
 ```bash
-git clone https://github.com/M-Sayed939/Movie-Reservation-FrontEnd.git
+git clone https://github.com/M-Sayed939/Movie-Reservation-FrontEnd
 cd movie-reservation-frontend
 ```
 

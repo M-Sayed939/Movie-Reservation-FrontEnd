@@ -1,0 +1,25 @@
+<div class="reservations-container">
+  <h1>My Reservations</h1>
+
+  <ng-container *ngIf="reservations$ | async as reservations; else loading">
+    <div *ngIf="reservations.length > 0; else noReservations" class="reservations-list">
+      <div *ngFor="let reservation of reservations" class="reservation-card">
+        <h2>{{ reservation.movieTitle }}</h2>
+        <div class="details">
+          <p><strong>Theater:</strong> {{ reservation.cinemaHallName }}</p>
+          <p><strong>Date & Time:</strong> {{ reservation.startTime | date:'full' }}</p>
+          <p><strong>Seats:</strong> {{ reservation.reservedSeats.join(', ') }}</p>
+          <p><strong>Status:</strong> <span class="status-badge" [class]="reservation.status.toLowerCase()">{{ reservation.status }}</span></p>
+        </div>
+      </div>
+    </div>
+    <ng-template #noReservations>
+      <p class="no-reservations-message">You have no upcoming reservations.</p>
+    </ng-template>
+  </ng-container>
+
+  <ng-template #loading>
+    <div class="loading-spinner"></div>
+    <p>Loading your reservations...</p>
+  </ng-template>
+</div>
